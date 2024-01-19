@@ -1,4 +1,4 @@
-# Employee Management System
+# Employee Management System (Coti informática assignment)
 
 ## Overview
 
