@@ -19,3 +19,19 @@ Employee records are serialized and stored in a JSON file using the Newtonsoft.J
 ## Usage
 
 1. Clone the repository to your local machine.
+
+2. Compile and run the program using a C# compiler (e.g., Visual Studio, dotnet CLI).
+
+3. Follow the on-screen instructions to interact with the Employee Management System.
+
+## Dependencies
+
+- Newtonsoft.Json: Used for JSON serialization and deserialization.
+
+## Contribution
+
+Contributions are welcome! If you have any suggestions, improvements, or bug fixes, feel free to create an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
