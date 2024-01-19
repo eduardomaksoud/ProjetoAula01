@@ -4,13 +4,13 @@
     {
         public static void Main(string[] args)
         { 
-            UserRepository userRepository = new UserRepository();
-            UserManager userManager = new UserManager(userRepository);
-            CommandHandler commandHandler = new CommandHandler(userManager);
+            EmployeeRepository employeeRepository = new EmployeeRepository();
+            EmployeeManager employeeManager = new EmployeeManager(employeeRepository);
+            CommandHandler commandHandler = new CommandHandler(employeeManager);
 
-            Console.WriteLine("Type 'getUsers' to retrieve the list of users.");
-            Console.WriteLine("Type 'addUser' to add a new user.");
-            Console.WriteLine("Type 'deleteUser' to delete a user by ID.");
+            Console.WriteLine("Type 'getEmployees' to retrieve the list of employees.");
+            Console.WriteLine("Type 'addEmployee' to add a new employee.");
+            Console.WriteLine("Type 'deleteEmployee' to delete an employee by an id.");
             Console.WriteLine("Type 'exit' to exit.");
 
             while (true)

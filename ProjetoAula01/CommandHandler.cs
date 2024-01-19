@@ -2,11 +2,11 @@
 
 class CommandHandler
 {
-    private readonly UserManager userManager;
+    private readonly EmployeeManager employeeManager;
 
-    public CommandHandler(UserManager userManager)
+    public CommandHandler(EmployeeManager employeeManager)
     {
-        this.userManager = userManager;
+        this.employeeManager = employeeManager;
     }
 
     public void ProcessCommand(string command)
@@ -15,13 +15,13 @@ class CommandHandler
 
         switch (commandParts[0].ToLower())
         {
-            case "getusers":
+            case "getemployees":
                 DisplayUsers();
                 break;
-            case "adduser":
-                AddUser();
+            case "addemployee":
+                AddEmployee();
                 break;
-            case "deleteuser":
+            case "deleteemployee":
                 if (commandParts.Length > 1)
                 {
                     string userIdString = commandParts[1];
@@ -29,7 +29,7 @@ class CommandHandler
                 }
                 else
                 {
-                    Console.WriteLine("Invalid command format. Usage: deleteUser <userId>");
+                    Console.WriteLine("Invalid command format. Usage: deleteEmployee <employeeId>");
                 }
                 break;
             default:
@@ -40,46 +40,55 @@ class CommandHandler
 
     private void DisplayUsers()
     {
-        Console.WriteLine("List of users:");
-        foreach (var user in userManager.GetUsers())
+        Console.WriteLine("List of employees:");
+        foreach (var employee in employeeManager.GetEmployees())
         {
-            user.Print();
+            employee.Print();
         }
     }
 
-    private void AddUser()
+    private void AddEmployee()
     {
         Console.Write("Enter username: ");
         string username = Console.ReadLine();
 
-        Console.Write("Enter email: ");
-        string email = Console.ReadLine();
-
         Console.Write("Enter cpf: ");
         string cpf = Console.ReadLine();
 
-        User newUser = new User(Guid.NewGuid(), username, email, cpf);
-        userManager.AddUser(newUser);
+        Console.Write("Enter code: ");
+        string code = Console.ReadLine();
 
-        Console.WriteLine($"User {newUser.Name} added successfully!");
+        Console.Write("Enter admission date (YYYY-MM-DD): ");
+        string admissionDateInput = Console.ReadLine();
+
+        Console.Write("Enter role: ");
+        string role = Console.ReadLine();
+
+        Console.Write("Enter salary: ");
+        decimal salary = decimal.Parse(Console.ReadLine());
+
+        Employee newEmployee = new Employee(Guid.NewGuid(), username, cpf, code, DateTime.Parse(admissionDateInput), role, salary);
+        employeeManager.AddEmployee(newEmployee);
+
+        Console.WriteLine($"Employee {newEmployee.Name} added successfully!");
     }
 
-    private void DeleteUserById(string userIdString)
+    private void DeleteUserById(string employeeIdString)
     {
-        if (Guid.TryParse(userIdString, out Guid userId) || Guid.TryParseExact(userIdString, "D", out userId))
+        if (Guid.TryParse(employeeIdString, out Guid employeeId) || Guid.TryParseExact(employeeIdString, "D", out employeeId))
         {
-            if (userManager.DeleteUserById(userId))
+            if (employeeManager.DeleteEmployeeById(employeeId))
             {
-                Console.WriteLine($"User with ID {userId} deleted successfully.");
+                Console.WriteLine($"Employee with ID {employeeId} deleted successfully.");
             }
             else
             {
-                Console.WriteLine($"User with ID {userId} not found.");
+                Console.WriteLine($"Employee with ID {employeeId} not found.");
             }
         }
         else
         {
-            Console.WriteLine("Invalid GUID format. Usage: deleteUser <userId>");
+            Console.WriteLine("Invalid GUID format. Usage: deleteEmployee <employeeId>");
         }
     }
 }
